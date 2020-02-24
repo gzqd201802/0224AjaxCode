@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../assets/js/jquery-1.12.2.js"></script>
+    <script>
+        // Data - 学生列表数据（JSONP）
+        // 用传入的 callback 函数包裹数据，以 callback(res) 形式返回 js 文件
+        // 请求方式：GET
+        // 请求样例：http://127.0.0.1:3001/getStudentsJSONP.js?callback=fn
+        // 请求参数: callback=回调函数名
+
+        // 核心：JSONP是通过动态<script>标签发起的请求。
+        $(function(){
+            
+            // 在 window 上添加全局函数
+            window.fn = function(res){
+                console.log(res);
+            }
+
+            // 动态创建 script 标签
+            const $newScript = $('<script>');
+                // 给 script 标签添加 src 属性，就是请求地址
+                $newScript.attr({
+                    src: `http://127.0.0.1:3001/getStudentsJSONP.js?callback=fn`
+                });
+            // 把标签添加到 body 中
+            $('body').append($newScript);
+            // JSONP 回来的格式是一个函数包裹着JSON数据，并且函数会自动执行，而且函数是全局函数
+
+
+        })
+    </script>
+</body>
+</html>

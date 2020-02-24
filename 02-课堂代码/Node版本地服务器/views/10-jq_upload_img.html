@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 方式上传图片</title>
+</head>
+
+<body>
+    <!-- 图片上传 input type="file" -->
+    <input type="file" id="chooseFile">
+    <!-- 当我们点击上传按钮的时候，其实是从本地文件上传到了浏览器中缓存了起来 -->
+    <script>
+        // File - 上传文件
+        // 请求方式：POST
+        // 请求地址：http://127.0.0.1:3001/uploadFile
+        // 请求参数：avatar
+    </script>
+    <script src="../assets/js/jquery-1.12.2.js"></script>
+    <script>
+
+        $(function () {
+
+            // - 1. 注册 change 事件
+            // - 2. 准备图片数据 使用 FormData 对象的 append 方法
+            // - 3. 使用 $.ajax() 上传
+
+            // 注意点：jq对象上只有jq对象的方法和属性，并没有原生对象的属性和方法
+            //        获取图片对象的数据需要用原生对象
+
+            // - 1. 注册 change 事件
+            $('#chooseFile').change(function () {
+
+                console.log('文件变化自动触发');
+                // this      原生DOM对象
+                // $(this)   JQ 对象
+                console.dir(this.files[0]);
+
+                // 2. 准备图片数据 使用 FormData 对象的 append 方法
+                const fd = new FormData();
+                fd.append('avatar', this.files[0]);
+
+                // 3. 使用 $.ajax() 上传
+                $.ajax({
+                    type: "post",
+                    url: "http://127.0.0.1:3001/uploadFile",
+                    // formdata 其实就是一种特殊的参数格式
+                    data: fd,
+                    // 禁用自动添加请求头, fd 有自己的请求头
+                    contentType: false,
+                    // 禁用自动把参数传字符串
+                    processData: false,
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+
+
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>

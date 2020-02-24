@@ -22,6 +22,7 @@
             console.log(chooseFile.files[0]);
             // 把 浏览器缓存的图片添加到 FormData 对象中
             const fd = new FormData();
+            // 通过 append() 方法把浏览器缓存的图片添加到 FormData 对象中，用于后面发送 ajax 请求
             fd.append('avatar', chooseFile.files[0]);
 
             // 通过原生 ajax 发送请求到服务器 - 把本地图片上传到服务器

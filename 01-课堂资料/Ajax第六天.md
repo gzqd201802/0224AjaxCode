@@ -219,9 +219,9 @@ var xhr = new XMLHttpRequest();
 
 ### jQuery 上传图片实例
 
-- 注册 onchange 事件
+- 注册 change 事件
 - 准备图片数据 使用 FormData 对象的 append 方法
-- 使用 ajax 上传
+- 使用 $.ajax() 上传
 
 ### jQuery 上传图片注意事项
 
@@ -289,7 +289,7 @@ $.ajax({
 - 获取文件二进制数据 var data = new FormData() ; FormData.appand ('key', this.files[0])
 - ajax 传输文件
 
-### 原生 XMLHttpRequest 实现上传进度条
+### 原生 XMLHttpRequest 实现上传进度条 - 了解
 
 xhr.onprogress / xhr.upload.onprogress 分别是下载和上传的进度变化事件
 
@@ -301,8 +301,8 @@ xhr.onprogress / xhr.upload.onprogress 分别是下载和上传的进度变化�
 xhr.upload.onprogress = function(event) {
 //一个数字代表已经上传的数据量 event.loaded
 //一个数字代表总数据量 event.total
-//计算百分比即可 var percent = Math.floor((event.loaded / event.total)*100) + "%"
-//接下来渲染在页面即可
+// 计算百分比即可 var percent = Math.floor((event.loaded / event.total)*100) + "%"
+// 接下来渲染在页面即可
     var domPercent = document.querySelector('#percent');
     domPercent.innerHTML = percent;
    	console.log(percent);

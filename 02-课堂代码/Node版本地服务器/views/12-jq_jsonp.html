@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../assets/js/jquery-1.12.2.js"></script>
+    <script>
+        // Data - 学生列表数据（JSONP）
+        // 用传入的 callback 函数包裹数据，以 callback(res) 形式返回 js 文件
+        // 请求方式：GET
+        // 请求样例：http://127.0.0.1:3001/getStudentsJSONP.js?callback=fn
+        // 请求参数: callback=回调函数名
+
+        // 核心：JSONP是通过动态<script>标签发起的请求。
+        $(function(){
+            
+            // 如果 dataType 设置成了 jsonp，其实是不会创建 xhr 对象的
+            // 只是 jQuery 为了让开发者方便使用而这么封装的。
+            //  1. 自动创建一个 script 标签
+            //  2. 把 url 的值作为 script 的 src 属性
+            //  3. 随机生成一个函数名字作为参数传递
+            //  4. 自动调用jsonp接口返回的函数
+            //  5. response 中获取到 jsonp 中的 json 数据
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:3001/getStudentsJSONP.js",
+                dataType: "jsonp",
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+           
+        })
+    </script>
+</body>
+</html>
