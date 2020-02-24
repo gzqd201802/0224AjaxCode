@@ -21,9 +21,10 @@
             // 只是 jQuery 为了让开发者方便使用而这么封装的。
             //  1. 自动创建一个 script 标签
             //  2. 把 url 的值作为 script 的 src 属性
-            //  3. 随机生成一个函数名字作为参数传递
+            //  3. 自动随机生成一个函数，并把函数名作为参数传递
             //  4. 自动调用jsonp接口返回的函数
             //  5. response 中获取到 jsonp 中的 json 数据
+            //  6. 自动删除掉动态创建的 script 标签
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:3001/getStudentsJSONP.js",
