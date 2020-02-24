@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormData基本使用</title>
+</head>
+<body>
+    <form>
+        用户名：<input type="text" name="username" value="小明">
+        密码：<input type="password" name="pwd" value="123456">
+    </form>
+    <script>
+
+        // FormData 基本使用 主要是配合 post 请求使用
+        // 目标：通过 FormData 序列化表单数据(快速获取表单数据)。
+        //          1. 查找表单元素( 原生的 DOM 对象 )
+        //          2. 把整个表单元素传入 FormData 对象中
+        
+
+        // 了解
+        // console.log(document.forms[0]);
+        
+
+        // 1. 查找到表单
+        const form = document.querySelector('form');
+        // console.log(form);
+
+        // 2. 把表单元素作为 FormData 的参数传入，进行 form 表单序列化。
+        const fd = new FormData(form);
+
+        // 表单序列化
+        //      根据表单元素的 name 和 value 获取到数据的名称和值
+        //      
+
+        // FormData 对象自动把传入的 form元素 的 name 和 value 获取到数据
+        // 如：<input type="text" name="username" value="小明">
+        // 
+
+        // 测试：通过 get 方法获取到模拟表单对象中的数据
+        console.log(fd.get('username'));
+        console.log(fd.get('pwd'));
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        用户名：<input type="text" name="userName">
+        密码：<input type="text" name="userPwd">
+        <input type="submit" value="提交注册">
+    </form>
+    <script>
+        // 目标：通过 原生的方式发送  FormData 数据到服务器
+        // 请求接口 - 通过手机号码注册用户
+        // 请求方式：post
+        // 请求地址：http://127.0.0.1:3001/register
+        // 请求参数：phone
+        
+        // 1. 查找注册按钮
+        const btn = document.querySelector('[type="submit"]');
+        const form = document.querySelector('form');
+
+        btn.onclick = function(e){
+            e.preventDefault();
+            // 创建 ajax 对象，xhr
+            const xhr = new XMLHttpRequest();
+
+            // 注册回调函数
+            xhr.onload = function () { 
+                console.log(xhr.responseText);
+            }
+            // open()  填写请求方式和请求地址
+            xhr.open('post', 'http://127.0.0.1:3001/register');
+
+            // 之前的 post 请求需要添加请求头,formdata方式提交不需要添加请求头.
+            // formdata 对象自动配置适当的 content-type 请求头
+            // xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+
+            // 通过 FormData 序列化 form 表单的数据
+            const fd = new FormData(form);
+            
+            // send()  发送请求, fd 对象就作为参数直接传递
+            xhr.send(fd);
+
+        }
+
+    </script>
+</body>
+</html>

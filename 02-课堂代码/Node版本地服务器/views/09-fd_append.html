@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 图片上传 input type="file" -->
+    <input type="file" id="chooseFile">
+    <!-- 当我们点击上传按钮的时候，其实是从本地文件上传到了浏览器中缓存了起来 -->
+    <script>
+
+        const chooseFile = document.querySelector('#chooseFile');
+
+        // onchange 事件在文件发生变化的时候会自动触发。
+        chooseFile.onchange = function(){
+            // console.log('文件已改变');
+            // 上传的图片缓存到 上传按钮的 files 属性上
+            // console.dir(chooseFile);
+            // 由于 files 属性是伪数组，所以需要通过索引值获取到数据
+            console.log(chooseFile.files[0]);
+            // 把 浏览器缓存的图片添加到 FormData 对象中
+            const fd = new FormData();
+            fd.append('avatar', chooseFile.files[0]);
+
+            // 通过原生 ajax 发送请求到服务器 - 把本地图片上传到服务器
+
+            const xhr = new XMLHttpRequest();
+
+            xhr.onload = function(){
+                console.log(xhr.responseText);
+            }
+
+            xhr.open('POST', 'http://127.0.0.1:3001/uploadFile');
+
+            xhr.send(fd);
+
+
+         }
+
+
+
+// File - 上传文件
+// POST
+// /uploadFile
+// 请求样例：
+// http://127.0.0.1:3001/uploadFile
+// 参数
+// 字段	类型	描述
+// avatar	Binary	
+// 二进制文件数据
+    </script>
+</body>
+</html>

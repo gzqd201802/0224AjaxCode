@@ -20,20 +20,16 @@
     <script src="../assets/js/jquery-1.12.2.js"></script>
 
     <script>
+        // 请求接口 - 通过手机号码注册用户
+        // 请求方式：post
+        // 请求地址：http://127.0.0.1:3001/register
+        // 请求参数：phone
+
         var userNameInput = document.querySelector('#userName');
         var userPwdInput = document.querySelector('#userPwd');
         
         var btn = document.querySelector('#btn');
         btn.onclick = function() {
-            // 如果我想要传输数据，有两种形式
-            // 字符串
-            // var dataStr = 'userName=' + userNameInput.value + '&userPwd=' + userPwdInput.value;
-            // 对象
-            // var dataObj = {
-            //     userName: userNameInput.value,
-            //     userPwd: userPwdInput.value
-            // }
-
             // 二进制的方式，传入数据
             // FormData 对象
             // var data = new FormData()

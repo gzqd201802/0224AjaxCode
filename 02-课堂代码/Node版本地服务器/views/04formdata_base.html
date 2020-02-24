@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormData基本使用</title>
+</head>
+<body>
+    <script>
+
+        // FormData 基本使用 主要是配合 post 请求使用
+        // 目标：通过 FormData 模拟表单数据。
+        //       1.   .append('key','value')    往模拟的表单对象中添加一条数据
+        //       2.   .get('key')               往模拟的表单对象中获取数据
+
+        const fd = new FormData();
+
+        // 往 fd 对象中添加一条数据
+        fd.append('phone','12345678910');
+
+        // fd 对象
+        console.log(fd.get('phone'));
+        
+
+
+
+    </script>
+</body>
+</html>

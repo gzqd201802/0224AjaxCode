@@ -23,17 +23,17 @@
             // 存放着你的图片，其中只上传一张就是 this.files[0]
             // 要将这张图片变成可以上传，符合后台要求的二进制数据，
             // 使用 FormData 对象
-            var data = new FormData()
+            var fd = new FormData()
             // 如果不穿 form 表单 创建出来的是一个空对象
             // 使用 append 方法，将图片放入这个对象，其中图片的字段名需要参考文档
-            data.append('avatar', this.files[0]);
+            fd.append('avatar', this.files[0]);
             // 这时候图片就准备完毕可以进行 ajax 请求了
 
             // 发送 ajax 请求
             $.post({
                 // type,
                 url:'http://127.0.0.1:3001/uploadFile',
-                data:data,
+                data:fd,
                 dataType:'json',
                 // 不需要设置请求头
                 contentType:false,
