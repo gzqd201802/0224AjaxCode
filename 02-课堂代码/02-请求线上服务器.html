@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+        // 获取一条随机笑话
+        // 随机获取笑话的接口
+
+        // 请求地址：https://autumnfish.cn/api/joke
+        // 请求方法：get
+        // 请求参数：无
+        // 响应内容：随机笑话
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.onload = function(){
+            console.log(xhr.responseText);
+        }
+
+        xhr.open('GET','https://autumnfish.cn/api/joke');
+
+        xhr.send();
+
+    </script>
+</body>
+</html>

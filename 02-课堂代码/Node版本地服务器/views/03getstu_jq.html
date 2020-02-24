@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03-通过jq的ajax获取数据</title>
+</head>
+<body>
+    <!-- 引入 jq，需要有引入 assets 文件夹下的资源，通过路径提示实现 -->
+    <script src="../assets/js/jquery-1.12.2.js"></script>
+    <script>
+
+        // 接口文档：获取学生列表数据
+        // GET
+        // 请求样例：
+        // http://127.0.0.1:3001/getStudentsJSON
+
+        // console.log($);
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:3001/getStudentsJSON",
+            // 自己加 dataType: "json" 让 jq 主动转换成 js 对象
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            }
+        });
+        
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 接口文档：获取学生列表数据
+        // GET
+        // 请求样例：
+        // http://127.0.0.1:3001/getStudentsJSON
+
+
+        // 创建 xhr 对象
+        const xhr = new XMLHttpRequest();
+
+        // 注册 onload 事件，当请求成功时触发
+        xhr.onload = function(){
+            console.log(xhr.responseText);
+        }
+
+        // open() 按照接口文档属性请求方式和请求对此
+        xhr.open('GET','http://127.0.0.1:3001/getStudentsJSON');
+
+        // send() xhr 对象向服务器发起请求
+        xhr.send();
+
+
+    </script>
+</body>
+</html>
