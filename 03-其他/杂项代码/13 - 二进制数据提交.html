@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <label for="userName">用户名</label><br>
+        <input type="text" name="userName" id="userName"><br>
+        <label for="userPwd">密码</label><br>
+        <input type="password" name="userPwd" id="userPwd"><br><br>
+        <input type="button" value="提交注册" id="btn">
+    </form>
+    <script>
+        // 监听按钮 触发注册事件
+        var button = document.querySelector('#btn');
+        button.onclick = function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', 'http://127.0.0.1:3001/register');
+            // 即使是 post 请求，但是如果使用二进制的提交方式，那么不需要设置请求头
+            // 浏览器会自动设置一个
+            // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function () {
+
+            }
+            // 使用 FormData 对象将表单数据转为二进制
+            // 1 新建 FormData 对象,应该讲 form dom 对象作为参数
+            var form = document.querySelector('#form')
+            var data = new FormData(form);
+            // 之后这个 data 就可以作为 xhr.send() 的参数
+            xhr.send(data);
+        }
+        
+    </script>
+</body>
+</html>

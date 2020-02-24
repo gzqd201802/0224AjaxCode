@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原生上传图片</title>
+</head>
+<body>
+    <!-- <input type="file" name="fileUpload" id="fileUpload" multiple> -->
+    <input type="file" name="fileUpload" id="fileUpload">
+    <!-- 1引入 jQuery 库 -->
+    <script src="../assets/js/jquery-1.12.2.js"></script>
+    <script>
+        var inputFile = document.querySelector('#fileUpload');
+        inputFile.onchange = function() {
+            // console.log(this);
+            // 不能用 console.log 要使用 console.dir 查看对象
+            console.dir(this)
+            //文件存放在 this.files 是一个数组
+            // 第一个文件就是 this.files[0];
+
+            // 使用 ajax 上传文件
+            // 2 发送ajax 请求
+            // 获取二进制图片文件数据
+            var data = new FormData();
+            // 如果我们有 form 标签，可以传入一个form 对象
+            // 如果没有则直接生成一个 空的 FormData 对象
+            // data.append() 方法可以追加数据，传入两个参数，
+            // 第一个是数据名称（avatar）， 第二个是数据本身 (this.files[0])
+            data.append('avatar', this.files[0])
+            // 这个时候，就可以将data 作为二进制数据发送到 ajax 请求
+            $.ajax({
+                url: 'http://127.0.0.1:3001/uploadFile',
+                type:'post',
+                data:data,
+                dataType:'json',
+                contentType: false,
+                processData: false,
+                success: function(res) {
+                    console.log(res);
+                    
+                }
+            })
+            
+        }
+    </script>
+</body>
+</html>

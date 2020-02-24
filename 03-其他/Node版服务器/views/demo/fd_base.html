@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册表单</title>
+</head>
+<body>
+
+    <form id="form">
+        <label for="userName">用户名</label><br>
+        <input type="text" name="userName" id="userName"><br>
+        <label for="userPwd">密码</label><br>
+        <input type="text" name="userPwd" id="userPwd"><br><br>
+        <input type="button" value="注册" id="btn">
+    </form>
+    
+
+    <script src="../assets/js/jquery-1.12.2.js"></script>
+
+    <script>
+        var userNameInput = document.querySelector('#userName');
+        var userPwdInput = document.querySelector('#userPwd');
+        
+        var btn = document.querySelector('#btn');
+        btn.onclick = function() {
+            // 如果我想要传输数据，有两种形式
+            // 字符串
+            // var dataStr = 'userName=' + userNameInput.value + '&userPwd=' + userPwdInput.value;
+            // 对象
+            // var dataObj = {
+            //     userName: userNameInput.value,
+            //     userPwd: userPwdInput.value
+            // }
+
+            // 二进制的方式，传入数据
+            // FormData 对象
+            // var data = new FormData()
+            // 如果我想将整个表单的数据自动传进去，
+            // 就要将这个 form 作为参数，传输这个新建的对象里面
+            var formDom = document.querySelector('#form')
+            var fd = new FormData(formDom);
+            // 这个时候，我们的 data 就包含了整个表单的所有数据，可以直接发送
+
+            // 如果我们想要继续往这个 data 对象添加数据
+            // 使用 append 方法
+            // 如果我想要加一个手机号
+            fd.append('phone', '13100000000');
+
+
+            // ajax 封装做了两件事情，
+            // 1.如果是 post 请求 就添加请求头 application/x-www-form-urlencoded
+            // 2.如果传入的数据是一个对象，自动转换为字符串
+            // 因为我们现在是传入二进制对象，所以既不需要手动设置请求头，浏览器会自动添加一个合适的请求头
+            // 也不需要，将这个二进制转为字符串
+
+            // 需要禁止请求头的自动添加，
+            // 禁止数据自动转换为字符串
+            $.ajax({
+                type: "post",
+                url: "http://127.0.0.1:3001/register",
+                // data: dataStr,
+                // data: dataObj,
+                data: fd,
+                dataType: "json",
+                // 不要设置请求头
+                contentType: false,
+                // 不要自动转换数据为字符串
+                processData: false,
+                success: function (res) {
+                }
+            })
+        }
+        
+    </script>
+</body>
+</html>

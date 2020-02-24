@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function func(res) {
+            console.log(res)
+        }
+    </script>
+    <script src="http://127.0.0.1:3001/getStudentsJSONP.js?callback=func"></script>
+    <script>
+        //实际上他会返回
+        // func({name:'tom'});
+    </script>
+</body>
+</html>

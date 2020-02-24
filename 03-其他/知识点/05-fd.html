@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 用户验证
+        // 验证用户名是否可用
+
+        // 请求地址：https://autumnfish.cn/api/user/check
+        // 请求方法：post
+        // 请求参数：username
+
+        // const xhr = new XMLHttpRequest();
+        // xhr.onload = function(){
+        //     console.log(xhr.responseText);
+        // }
+
+        // xhr.open('post','https://autumnfish.cn/api/user/check');
+
+        // xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+
+        // xhr.send('username=123111');
+
+        
+        const fd = new FormData();
+
+        fd.append('username','11111');
+
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            console.log(xhr.responseText);
+        }
+
+        xhr.open('post','https://autumnfish.cn/api/user/check');
+        xhr.send(fd);
+
+    </script>
+</body>
+</html>

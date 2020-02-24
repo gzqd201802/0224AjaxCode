@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>点击按钮获取学生数据</title>
+</head>
+
+<body>
+    <input type="button" value="获取数据" id="btn">
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>性别</td>
+                <td>专业</td>
+                <td>地址</td>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+    <script type="text/template" id="template">
+        {{each data as val key}}
+        <tr>
+            <td>{{val.id}}</td>
+            <td>{{val.name}}</td>
+            <td>{{val.age}}</td>
+            {{if val.gender == "男" && val.age < 20}}
+            <td>小鲜肉</td>
+            {{else if val.gender == "男"}}
+            <td>老腊肉</td>
+            {{else}}
+            <td>靓女</td>
+            {{/if}}
+            <td>{{val.zhuanye}}</td>
+            <td>{{val.address}}</td>
+        </tr>
+        {{/each}}
+    </script>
+    <script src="../assets/js/jquery-1.12.2.js"></script>
+    <!-- 1 引入模板引擎库 -->
+    <script src="../assets/js/template.js"></script>
+    <script>
+        var button = document.querySelector('#btn');
+        button.onclick = function () {
+            // 1 创建异步对象
+            var xhr = new XMLHttpRequest();
+            // 2 初始化异步请求 
+            xhr.open('get','http://127.0.0.1:3001/getStudentsJSONDelay');
+            //get 请求不需要请求体
+            //3 监听请求状态
+            xhr.timeout = 2000;
+            xhr.ontimeout = function() {
+                console.log('请求超时请重试')
+            }
+            xhr.onreadystatechange = function() {
+                // 5 判断数据获取成功
+                if (xhr.status == 200 && xhr.readyState == 4) {
+                    var res = JSON.parse(xhr.responseText);
+                    var htmlStr = template('template', res);
+                    $('#tbody').html(htmlStr);
+                }
+            }
+            // 4 发送请求
+            xhr.send(null);
+
+            // $.ajax({
+            //     url: 'http://127.0.0.1:3001/getStudentsJSON',
+            //     type: 'get',
+            //     dataType: 'json',
+            //     success: function (res) {
+            //         console.log(res);
+            //         //渲染页面
+            //         var htmlStr = "";
+            //         // 模板：
+            //         // <tr>
+            //         //     <td>01</td>
+            //         //     <td>老陈</td>
+            //         //     <td>18</td>
+            //         //     <td>男</td>
+            //         //     <td>前端</td>
+            //         //     <td>珠吉路58号</td>
+            //         // </tr>
+            //         // for (var key in res.data) {
+            //         //     htmlStr += `
+            //         //     <tr>
+            //         //         <td>${res.data[key].id}</td>
+            //         //         <td>${res.data[key].name}</td>
+            //         //         <td>${res.data[key].age}</td>
+            //         //         <td>${res.data[key].gender}</td>
+            //         //         <td>${res.data[key].zhuanye}</td>
+            //         //         <td>${res.data[key].address}</td>
+            //         //     </tr>
+            //         //     `
+            //         // }
+            //         console.log(htmlStr);
+            //         // 3 生成html 字符串
+            //         var htmlStr = template('template', res);
+            //         $('#tbody').html(htmlStr);
+
+            //     }
+            // })
+        }
+    </script>
+</body>
+
+</html>

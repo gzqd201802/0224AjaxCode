@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原生 ajax 请求</title>
+</head>
+
+<body>
+
+    <div id="greeting"></div>
+    <script src="../assets/js/jquery-1.12.2.js"></script>
+    <script>
+        success = function(res) {
+            console.log(res);
+            
+        }
+    </script>
+    <script src="http://127.0.0.1:3001/getStudentsJSONP.js?callback=success"></script>
+</body>
+
+</html>

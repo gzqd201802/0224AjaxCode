@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>文件上传</title>
+</head>
+<body>
+    <input type="file" name="uploadImg" id="uploadImg">
+    <script>
+        var uploadInput = document.querySelector('#uploadImg');
+        // 一旦选择了文件，就会触发 onchange 事件
+        uploadInput.onchange = function() {
+            // console.log(this);
+            // 使用 console.log 打印标签没有意义
+            console.dir(this);
+            // 可以看到这个 this 里面有一个 files 属性
+            // 存放着你的图片，其中只上传一张就是 this.files[0]
+            // 要将这张图片变成可以上传，符合后台要求的二进制数据，
+            // 使用 FormData 对象
+            var data = new FormData()
+            // 如果不穿 form 表单 创建出来的是一个空对象
+            // 使用 append 方法，将图片放入这个对象，其中图片的字段名需要参考文档
+            data.append('avatar', this.files[0]);
+            // 这时候图片就准备完毕可以进行 ajax 请求了
+        }
+    </script>
+</body>
+</html>
